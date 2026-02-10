@@ -36,7 +36,8 @@
         nav {
             position: fixed; top: 0; width: 100%;
             background: rgba(255, 255, 255, 0.98);
-            padding: 20px 40px; display: flex;
+            padding: 20px 25px; 
+            display: flex;
             justify-content: space-between; align-items: center;
             z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.05);
         }
@@ -59,7 +60,7 @@
 
         .mobile-menu-btn { display: none; font-size: 1.5rem; color: var(--primary); cursor: pointer; }
 
-        /* --- LAYOUT UTBYGGNAD --- */
+        /* --- LAYOUT --- */
         .page-section { display: none; padding-top: 80px; animation: fadeIn 0.8s ease; }
         .page-section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -67,7 +68,6 @@
         .container { max-width: 1200px; margin: 0 auto; padding: 100px 20px; }
         .v-spacer { height: 120px; }
         
-        /* Premium Ramar */
         .img-frame {
             position: relative; padding: 15px; border: 1px solid var(--accent);
             display: inline-block; width: 100%;
@@ -75,12 +75,32 @@
         .img-frame img { width: 100%; display: block; transition: 0.8s; }
         .img-frame:hover img { transform: scale(1.02); }
 
+        /* --- SUB-HERO FIX (Här löser vi skymningen) --- */
+        .sub-hero {
+            height: 45vh; width: 100%;
+            background-size: cover; background-position: center;
+            display: flex; align-items: center; justify-content: center;
+            position: relative;
+            margin-top: 0; /* Tar bort negativ marginal så den hamnar UNDER menyn */
+        }
+        .sub-hero::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.4);
+        }
+        .sub-hero h2 { 
+            color: white !important; 
+            z-index: 1; 
+            font-size: clamp(2rem, 8vw, 3.5rem); 
+            text-shadow: 2px 2px 15px rgba(0,0,0,0.5);
+        }
+
         /* --- HOME / HERO --- */
         .hero {
             height: 100vh;
             background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1517433367423-c7e5b0f35086?q=80&w=2000');
             background-size: cover; background-position: center; background-attachment: fixed;
             display: flex; align-items: center; justify-content: center; text-align: center; color: var(--white);
+            margin-top: -80px; /* Flyttar upp hjälten bakom menyn för snygg transparens-effekt */
         }
         .hero-content h1 { font-size: clamp(3.5rem, 10vw, 7rem); color: var(--white); margin-bottom: 20px; font-weight: 900; }
 
@@ -108,7 +128,7 @@
         .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; max-width: 1200px; margin: 0 auto; }
         .footer-col h4 { color: var(--accent); text-transform: uppercase; margin-bottom: 25px; letter-spacing: 2px; }
 
-        /* --- MOBILE ADAPTATION --- */
+        /* --- MOBILE --- */
         @media (max-width: 900px) {
             .split-row { grid-template-columns: 1fr; gap: 40px; }
             .nav-links {
@@ -119,6 +139,7 @@
             .nav-links.active { right: 0; }
             .mobile-menu-btn { display: block; z-index: 1001; }
             .hero { background-attachment: scroll; }
+            .sub-hero { height: 30vh; }
         }
     </style>
 </head>
@@ -161,7 +182,7 @@
                 </div>
                 <div>
                     <h3>Vårt dagliga arbete</h3>
-                    <p>Varje morgon klockan 03:00 tänds ugnarna. Vi bakar små partier för att säkerställa att varje enskild bulle och varje bröd får den uppmärksamhet det förtjänar. Våra bagare använder sina sinnen – känslan av degen, doften av jäsningen och ljudet av en perfekt skorpa som knastrar när den kommer ut ur ugnen.</p>
+                    <p>Varje morgon klockan 03:00 tänds ugnarna. Vi bakar små partier för att säkerställa att varje enskild bulle och varje bröd får den uppmärksamhet det förtjänar. Våra bagare använder sina sinnen – känslan av degen, doften av jäsningen och ljudet av en perfekt skorpa som knastrar.</p>
                 </div>
             </div>
 
@@ -177,12 +198,10 @@
     </div>
 
     <div id="sortiment" class="page-section">
+        <div class="sub-hero" style="background-image: url('https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=1000');">
+            <h2>Vårt Sortiment</h2>
+        </div>
         <section class="container">
-            <div class="text-center-block" style="margin-bottom: 80px;">
-                <p style="color: var(--accent); font-weight: 700; letter-spacing: 3px;">UTFORSKA SMAKERNA</p>
-                <h2 style="font-size: 4rem;">Vårt Sortiment</h2>
-            </div>
-
             <h3 style="font-size: 2.5rem; border-bottom: 1px solid var(--accent); padding-bottom: 15px; margin-bottom: 50px;">01. Stenugnsbakat Bröd</h3>
             <div class="menu-grid">
                 <div class="menu-item">
@@ -260,13 +279,16 @@
     </div>
 
     <div id="om-oss" class="page-section">
+        <div class="sub-hero" style="background-image: url('https://images.unsplash.com/photo-1556910103-1c02745a30bf?q=80&w=1000');">
+            <h2>Vår Story</h2>
+        </div>
         <section class="container">
             <div class="split-row">
                 <div class="about-text">
                     <p style="color: var(--accent); font-weight: 700; letter-spacing: 2px;">VÅRT URSPRUNG</p>
                     <h2 style="font-size: 4rem; line-height: 1.1; margin-bottom: 30px;">Historien om en dröm och en surdeg</h2>
                     <p>Allt tog sin början en regnig novembereftermiddag 2018 i ett dragigt gammalt garage i Majorna. Med inget annat än en säck ekologiskt kulturspannmål, en begagnad stenugn och en orubblig vision, föddes <strong>Surdeg & Sötsak</strong>.</p>
-                    <p>Vi ville utmana den stressade, industriella brödproduktionen. Vi ville bevisa att bröd inte bara är bukfylla – det är ett hantverk, en vetenskap och, när det görs rätt, en ren smakupplevelse. Genom att återvända till de metoder som våra förfäder använde, har vi skapat en plats där tiden får stå stilla.</p>
+                    <p>Vi ville utmana den stressade, industriella brödproduktionen. Vi ville bevisa att bröd inte bara är bukfylla – det är ett hantverk, en vetenskap och, när det görs rätt, en ren smakupplevelse.</p>
                 </div>
                 <div class="img-frame">
                     <img src="https://images.unsplash.com/photo-1556910103-1c02745a30bf?q=80&w=1000" alt="Vår historia">
@@ -275,29 +297,23 @@
 
             <div class="v-spacer" style="height: 80px;"></div>
 
-            <div class="split-row" style="grid-template-columns: 1fr 1fr;">
+            <div class="split-row">
                  <div class="img-frame" style="order: 2;">
                     <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=1000" alt="Surdeg">
                 </div>
                 <div style="order: 1;">
                     <h2 style="font-size: 2.5rem;">Möt "Berta" – hjärtat i bageriet</h2>
-                    <p>Många frågar oss vad hemligheten är bakom våra karaktäristiska bröd. Svaret är Berta. Hon är vår äldsta surdegsgrund, startad på vildjäst från ekologiska äpplen samma dag som vi öppnade dörrarna för första gången.</p>
-                    <p>Berta matas varje dag med omsorg, och det är hennes naturliga kraft som ger våra bröd den där djupa syran, den sega inkråmet och den krispiga, mörka skorpan. Utan Berta, inget Surdeg & Sötsak.</p>
+                    <p>Många frågar oss vad hemligheten är. Svaret är Berta. Hon är vår äldsta surdegsgrund, startad på vildjäst från ekologiska äpplen samma dag som vi öppnade dörrarna.</p>
+                    <p>Berta matas varje dag med omsorg, och det är hennes naturliga kraft som ger våra bröd den där djupa syran och den krispiga skorpan.</p>
                 </div>
-            </div>
-
-            <div class="v-spacer"></div>
-
-            <div class="text-center-block">
-                <p style="color: var(--accent); font-weight: 700; letter-spacing: 3px;">VÅRT LÖFTE</p>
-                <h2 style="font-size: 3rem;">Råvaror med ett samvete</h2>
-                <p>Vi tror på transparens. Därför kommer vårt mjöl uteslutande från lokala kvarnar där spannmålet odlas utan bekämpningsmedel. Smöret kärnas på små gårdsmejerier och våra bär plockas när de är som allra sötast.</p>
-                <p>Idag är vi mer än bara ett bageri – vi är en del av Göteborgs mathistoria. Men oavsett hur mycket vi växer, kommer vi aldrig att tulla på våra principer: <strong>Inga tillsatser, bara kärlek och tid.</strong></p>
             </div>
         </section>
     </div>
 
     <div id="catering" class="page-section">
+        <div class="sub-hero" style="background-image: url('https://images.unsplash.com/photo-1535141192574-5d4897c12636?q=80&w=1000');">
+            <h2>Catering & Fest</h2>
+        </div>
         <section class="container">
             <div class="split-row">
                 <div>
@@ -305,19 +321,14 @@
                     <h2 style="font-size: 3rem;">Gör det oförglömligt</h2>
                     <br>
                     <h3>Frukost & Fika</h3>
-                    <p>Vi sätter ihop kompletta paket med nystekta frallor, juice, chiapudding och givetvis våra berömda bullar. Perfekt för morgonmötet eller fredagsfikat.</p>
-                    <br>
-                    <h3>Tårtor & Bakelser</h3>
-                    <p>Vår konditor skapar skräddarsydda tårtor för allt från dop till stora bröllop. Vi jobbar med rena smaker och vacker dekor från naturen.</p>
+                    <p>Vi sätter ihop kompletta paket med nystekta frallor, juice, chiapudding och givetvis våra berömda bullar.</p>
                 </div>
                 <div class="img-frame">
                     <img src="https://images.unsplash.com/photo-1535141192574-5d4897c12636?q=80&w=1000">
                 </div>
             </div>
 
-            <div class="v-spacer"></div>
-
-            <form action="#" method="POST" style="max-width: 800px; margin: 0 auto;">
+            <form action="#" method="POST" style="max-width: 800px; margin: 80px auto 0;">
                 <div class="text-center-block" style="margin-bottom: 50px;">
                     <h2>Bokningsförfrågan</h2>
                     <p>Berätta om dina planer så återkommer vi!</p>
@@ -325,13 +336,6 @@
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
                     <input type="text" placeholder="Namn / Företag" required style="padding: 15px; border: 1px solid #ddd;">
                     <input type="email" placeholder="E-post" required style="padding: 15px; border: 1px solid #ddd;">
-                </div>
-                <div style="margin-bottom: 20px;">
-                    <select style="width: 100%; padding: 15px; border: 1px solid #ddd;">
-                        <option>Företagsevent</option>
-                        <option>Privat fest</option>
-                        <option>Bröllop</option>
-                    </select>
                 </div>
                 <div style="margin-bottom: 20px;">
                     <textarea rows="6" placeholder="Vad vill ni beställa?" required style="width: 100%; padding: 15px; border: 1px solid #ddd;"></textarea>
@@ -342,29 +346,18 @@
     </div>
 
     <div id="kontakt" class="page-section">
+        <div class="sub-hero" style="background-image: url('https://images.unsplash.com/photo-1517433367423-c7e5b0f35086?q=80&w=2000');">
+            <h2>Hitta Hit</h2>
+        </div>
         <section class="container">
-            <div class="section-title" style="text-align: center; margin-bottom: 60px;">
-                <p style="color: var(--accent); font-weight: 700;">BESÖK OSS</p>
-                <h2 style="font-size: 3rem;">Hitta till doften</h2>
-            </div>
-            
             <div style="width: 100%; height: 450px; margin-bottom: 60px; border: 1px solid var(--accent); padding: 10px;">
-                <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2131.7583688176465!2d11.961472577454378!3d57.70119107386705!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x464ff36ea0836511%3A0x1d957d0794191d4e!2sStorgatan%2012%2C%20411%2038%20G%C3%B6teborg!5e0!3m2!1ssv!2sse!4v1700000000000!5m2!1ssv!2sse" 
-                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2131.7583688176465!2d11.961472577454378!3d57.70119107386705!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x464ff36ea0836511%3A0x1d957d0794191d4e!2sStorgatan%2012%2C%20411%2038%20G%C3%B6teborg!5e0!3m2!1ssv!2sse!4v1700000000000!5m2!1ssv!2sse" width="100%" height="100%" style="border:0;" loading="lazy"></iframe>
             </div>
-
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; text-align: center;">
                 <div>
                     <i class="fas fa-map-marker-alt" style="color: var(--accent); font-size: 2rem; margin-bottom: 15px;"></i>
                     <h4>Adress</h4>
                     <p>Storgatan 12<br>411 38 Göteborg</p>
-                </div>
-                <div>
-                    <i class="fas fa-phone" style="color: var(--accent); font-size: 2rem; margin-bottom: 15px;"></i>
-                    <h4>Kontakt</h4>
-                    <p>031 - 123 45 67<br>hej@surdegsotsak.se</p>
                 </div>
                 <div>
                     <i class="fas fa-clock" style="color: var(--accent); font-size: 2rem; margin-bottom: 15px;"></i>
@@ -379,24 +372,8 @@
         <div class="footer-grid">
             <div class="footer-col">
                 <a href="#" class="logo" style="color: white;">Surdeg <span>&</span> Sötsak</a>
-                <p style="margin-top: 20px; opacity: 0.7;">Vi för traditionen vidare genom modernt hantverk och lokala råvaror. Upplev skillnaden med äkta surdeg.</p>
+                <p style="margin-top: 20px; opacity: 0.7;">Hantverkat med kärlek i Göteborg.</p>
             </div>
-            <div class="footer-col">
-                <h4>Snabblänkar</h4>
-                <p onclick="showPage('home')" style="cursor:pointer">Hem</p>
-                <p onclick="showPage('sortiment')" style="cursor:pointer">Sortiment</p>
-                <p onclick="showPage('catering')" style="cursor:pointer">Catering</p>
-            </div>
-            <div class="footer-col">
-                <h4>Följ oss</h4>
-                <div class="socials">
-                    <a href="#" style="color: white; font-size: 1.5rem; margin-right: 15px;"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" style="color: white; font-size: 1.5rem;"><i class="fa-brands fa-facebook"></i></a>
-                </div>
-            </div>
-        </div>
-        <div style="text-align: center; margin-top: 60px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; opacity: 0.5; font-size: 0.8rem;">
-            © 2026 Surdeg & Sötsak AB. Hantverkat med kärlek i Göteborg.
         </div>
     </footer>
 
